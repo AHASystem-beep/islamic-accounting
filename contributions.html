@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المساهمات المنشورة — منصة المحاسبة التطبيقية للمعاملات المالية الإسلامية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة" aria-expanded="false" aria-controls="drawer">☰</button>
+    <div class="topbar-title">
+      <a href="index.html">منصة المحاسبة التطبيقية</a>
+      <small>مرجع تعاوني مفتوح — الإصدار التأسيسي</small>
+    </div>
+    <a class="topbar-guide-btn" href="https://aghiadhamad99.blogspot.com/2026/07/blog-post.html" target="_blank" rel="noopener">📘 الدليل التأسيسي</a>
+  </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <span>القائمة</span>
+    <button class="drawer-close" id="drawerClose" aria-label="إغلاق القائمة">×</button>
+  </div>
+  <nav>
+    <a href="why.html">لماذا أُنشئ المشروع؟</a>
+    <a href="vision.html">رؤية المشروع</a>
+    <a href="goals.html">الأهداف</a>
+    <a href="structure.html">الهيكل المقترح للدليل</a>
+    <a href="contributions.html">المساهمات المنشورة</a>
+    <a href="contribute.html">كيف يمكن المساهمة؟</a>
+    <a href="contact.html">راسلنا</a>
+  </nav>
+  <div class="drawer-footer">منصة المحاسبة التطبيقية للمعاملات المالية الإسلامية — مشروع مفتوح للذكاء الجمعي</div>
+</aside>
+
+<div class="page-sheet">
+  <div class="contrib-heading">
+    <h1 class="article-title" style="margin:0;">المساهمات المنشورة</h1>
+    <span class="contrib-count" id="contribCountLabel"></span>
+  </div>
+  <p class="article-kicker">تُضاف هذه القائمة تلقائياً من ملف apps-config.js — لا حاجة لتعديل أي صفحة عند نشر مساهمة جديدة</p>
+
+  <div id="contrib-grid" class="contrib-grid"></div>
+  <div id="contrib-empty" class="contrib-empty" style="display:none;">
+    لا توجد مساهمات منشورة بعد — كن أول المساهمين عبر
+    <a href="contact.html">صفحة راسلنا</a>.
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="index.html">الرئيسية</a><span>·</span>
+    <a href="contribute.html">كيف تساهم</a>
+  </div>
+  <div>منصة المحاسبة التطبيقية للمعاملات المالية الإسلامية — مشروع مفتوح للذكاء الجمعي</div>
+</footer>
+
+<script src="apps-config.js"></script>
+<script src="nav.js"></script>
+<script>
+(function(){
+  var list = (window.AHA_CONTRIBUTIONS || []).slice();
+  var grid = document.getElementById('contrib-grid');
+  var empty = document.getElementById('contrib-empty');
+  var countLabel = document.getElementById('contribCountLabel');
+
+  countLabel.textContent = list.length ? (list.length + ' موضوعاً') : '';
+
+  if (!list.length) {
+    empty.style.display = 'block';
+    return;
+  }
+
+  list.sort(function(a, b){ return (b.date || '').localeCompare(a.date || ''); });
+  list.forEach(function(item){
+    var card = document.createElement('div');
+    card.className = 'contrib-card';
+
+    var tag = document.createElement('span');
+    tag.className = 'contrib-tag';
+    tag.textContent = item.section || 'عام';
+    card.appendChild(tag);
+
+    var h3 = document.createElement('h3');
+    h3.textContent = item.title || '';
+    card.appendChild(h3);
+
+    var meta = document.createElement('p');
+    meta.className = 'contrib-meta';
+    meta.textContent = 'أعدّه: ' + (item.author || 'مجهول') + (item.date ? ' — ' + item.date : '');
+    card.appendChild(meta);
+
+    if (item.summary) {
+      var summary = document.createElement('p');
+      summary.className = 'contrib-summary';
+      summary.textContent = item.summary;
+      card.appendChild(summary);
+    }
+
+    if (item.fileUrl) {
+      var link = document.createElement('a');
+      link.className = 'contrib-link';
+      link.href = item.fileUrl;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = 'فتح الموضوع ←';
+      card.appendChild(link);
+    }
+
+    grid.appendChild(card);
+  });
+})();
+</script>
+</body>
+</html>
