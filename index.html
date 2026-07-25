@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>منصة المحاسبة التطبيقية للمعاملات المالية الإسلامية</title>
-<meta name="description" content="مشروع مرجعي تعاوني مفتوح يبني دليلاً تطبيقياً موحداً للمحاسبة الخاصة بالمعاملات المالية الإسلامية، بالذكاء الجمعي، للاستخدام داخل أي برنامج محاسبي.">
+<meta name="description" content="مرجع تطبيقي تعاوني مفتوح للمحاسبة الخاصة بالمعاملات المالية الإسلامية، يُبنى بالذكاء الجمعي.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,140 +20,87 @@
     --line:#E4E1D8;
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
   body{
     margin:0;
+    overflow-x:hidden;
     background:var(--cream);
     color:var(--ink);
     font-family:'Cairo','Tajawal',sans-serif;
-    line-height:1.9;
-    font-size:17px;
+    line-height:1.85;
+    font-size:16.5px;
   }
   a{color:inherit;}
-  a:focus-visible, button:focus-visible{outline:3px solid var(--gold); outline-offset:3px;}
+  a:focus-visible, button:focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+  .visually-hidden{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);}
 
-  /* ---------- hero ---------- */
-  .hero{
-    background:linear-gradient(180deg,var(--navy) 0%, var(--navy-dark) 100%);
+  /* ================= top bar (Wikipedia-style) ================= */
+  .topbar{
+    position:sticky; top:0; z-index:40;
+    background:var(--navy);
     color:#fff;
-    padding:88px 24px 96px;
-    position:relative;
-    overflow:hidden;
+    border-bottom:3px solid var(--gold);
   }
-  .hero::before{
-    content:"";
-    position:absolute; inset:0 0 auto 0; height:6px;
-    background:var(--gold);
+  .topbar-inner{
+    max-width:960px; margin:0 auto;
+    display:flex; align-items:center; gap:14px;
+    padding:12px 18px;
   }
-  .hero-inner{max-width:760px; margin:0 auto; text-align:center;}
-  .eyebrow{
-    display:inline-block;
-    font-size:14px; letter-spacing:.03em;
-    color:var(--gold); font-weight:700;
-    border:1px solid rgba(201,151,31,.5);
-    border-radius:999px; padding:6px 18px;
-    margin-bottom:28px;
+  .menu-btn{
+    background:transparent; border:1px solid rgba(255,255,255,.35);
+    color:#fff; border-radius:6px;
+    width:40px; height:40px; flex:0 0 auto;
+    font-size:20px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
   }
-  h1{
+  .menu-btn:hover{background:rgba(255,255,255,.1);}
+  .topbar-title{
     font-family:'Noto Naskh Arabic', serif;
     font-weight:700;
-    font-size:clamp(30px, 5vw, 46px);
-    line-height:1.5;
-    margin:0 0 18px;
+    font-size:18px;
+    flex:1;
   }
-  .hero-sub{
-    font-size:19px;
-    color:#D7E2E5;
-    max-width:620px; margin:0 auto;
+  .topbar-title small{
+    display:block; font-family:'Cairo',sans-serif; font-weight:400;
+    font-size:12px; color:#C9D6D9; margin-top:2px;
   }
-  .hero-cta{
-    margin-top:40px;
-    display:flex; gap:14px; justify-content:center; flex-wrap:wrap;
+
+  /* ================= compact intro ================= */
+  .intro{
+    max-width:960px; margin:0 auto;
+    padding:34px 20px 22px;
+    text-align:center;
   }
-  .btn{
+  .intro-badge{
     display:inline-block;
-    padding:13px 28px;
-    border-radius:6px;
-    font-weight:700;
-    font-size:16px;
-    text-decoration:none;
-    transition:transform .15s ease, box-shadow .15s ease;
-  }
-  .btn:hover{transform:translateY(-1px);}
-  .btn-primary{background:var(--gold); color:var(--navy-dark);}
-  .btn-primary:hover{box-shadow:0 6px 18px rgba(201,151,31,.35);}
-  .btn-ghost{background:transparent; color:#fff; border:1px solid rgba(255,255,255,.5);}
-
-  /* ---------- shell ---------- */
-  main{max-width:760px; margin:0 auto; padding:0 24px;}
-  section{padding:64px 0;}
-  section + section{border-top:1px solid var(--line);}
-  h2{
-    font-size:24px; font-weight:800; color:var(--navy);
-    margin:0 0 10px;
-    padding-right:16px;
-    border-right:4px solid var(--gold);
-  }
-  .section-lede{color:var(--ink-soft); font-size:16px; margin:0 0 32px; padding-right:20px;}
-  p{margin:0 0 16px;}
-
-  /* ---------- why / vision cards ---------- */
-  .lead-text{font-size:18px;}
-  .quote-line{
-    border-right:3px solid var(--gold);
-    background:#FBF6E9;
-    padding:16px 20px;
-    border-radius:6px;
-    color:#5A4A1F;
-    margin:20px 0;
-  }
-
-  /* ---------- goals grid ---------- */
-  .goals{
-    display:grid; grid-template-columns:1fr 1fr; gap:16px;
-    margin-top:8px;
-  }
-  .goal{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:20px 22px;
-  }
-  .goal h3{margin:0 0 6px; font-size:16.5px; color:var(--navy); font-weight:700;}
-  .goal p{margin:0; font-size:15px; color:var(--ink-soft);}
-  @media(max-width:620px){.goals{grid-template-columns:1fr;}}
-
-  /* ---------- ledger structure list (signature element) ---------- */
-  .ledger{
-    margin-top:8px;
-    border-top:1px solid var(--line);
-  }
-  .ledger-row{
-    display:flex; align-items:baseline; gap:16px;
-    padding:16px 4px;
-    border-bottom:1px solid var(--line);
-  }
-  .ledger-num{
-    font-family:'Noto Naskh Arabic', serif;
-    color:var(--gold);
-    font-weight:700;
-    font-size:15px;
-    min-width:28px;
-  }
-  .ledger-name{font-weight:700; color:var(--ink); flex:1;}
-  .ledger-tag{
+    background:#FBF6E9; color:#8A6A00; border:1px solid #E9CE8A;
+    border-radius:999px; padding:5px 16px;
     font-size:12.5px; font-weight:700;
+    margin-bottom:16px;
+  }
+  .intro p{
+    max-width:620px; margin:0 auto 14px;
     color:var(--ink-soft);
-    background:#EFEDE6;
-    border-radius:999px;
-    padding:3px 12px;
-    white-space:nowrap;
+    font-size:16px;
+  }
+  .intro-stat{
+    font-size:14px; color:var(--navy); font-weight:700;
   }
 
-  /* ---------- published contributions (dynamic, from apps-config.js) ---------- */
+  /* ================= main: contributions ================= */
+  main{max-width:960px; margin:0 auto; padding:0 20px 80px;}
+  .contrib-heading{
+    display:flex; align-items:baseline; justify-content:space-between;
+    border-bottom:2px solid var(--line);
+    padding-bottom:10px; margin-bottom:20px;
+  }
+  .contrib-heading h1{
+    font-size:20px; margin:0; color:var(--navy); font-weight:800;
+  }
+  .contrib-count{font-size:13.5px; color:var(--ink-soft);}
+
   .contrib-grid{
     display:grid; grid-template-columns:1fr 1fr; gap:16px;
-    margin-top:8px;
   }
   .contrib-card{
     background:var(--paper);
@@ -181,249 +128,320 @@
   .contrib-empty{
     border:1px dashed var(--line);
     border-radius:8px;
-    padding:32px 24px;
+    padding:40px 24px;
     text-align:center;
     color:var(--ink-soft);
   }
   .contrib-empty a{color:var(--navy); font-weight:700; text-decoration:underline;}
   @media(max-width:620px){.contrib-grid{grid-template-columns:1fr;}}
 
-  /* ---------- contribute steps ---------- */
-  .steps{margin-top:8px; padding-right:0; list-style:none;}
-  .step{
-    display:flex; gap:16px; margin-bottom:20px;
+  /* ================= off-canvas drawer ================= */
+  .overlay{
+    position:fixed; inset:0; background:rgba(20,30,32,.45);
+    opacity:0; pointer-events:none; transition:opacity .2s ease;
+    z-index:50;
   }
-  .step-num{
-    flex:0 0 auto;
-    width:34px; height:34px;
-    border-radius:50%;
-    background:var(--navy);
-    color:#fff;
-    display:flex; align-items:center; justify-content:center;
-    font-weight:700; font-size:15px;
-  }
-  .step-body h3{margin:2px 0 4px; font-size:16.5px; color:var(--navy);}
-  .step-body p{margin:0; color:var(--ink-soft); font-size:15.5px;}
+  .overlay.open{opacity:1; pointer-events:auto;}
 
-  .contact-box{
-    background:var(--navy);
-    color:#fff;
-    border-radius:10px;
-    padding:32px;
-    text-align:center;
+  .drawer{
+    position:fixed; top:0; bottom:0; right:0;
+    width:min(320px, 86vw);
+    background:var(--paper);
+    box-shadow:-8px 0 24px rgba(0,0,0,.15);
+    transform:translateX(100%);
+    transition:transform .25s ease;
+    z-index:60;
+    display:flex; flex-direction:column;
+    overflow-y:auto;
   }
-  .contact-box h2{color:#fff; border-right-color:var(--gold);}
-  .contact-box .section-lede{color:#C9D6D9;}
-  .contact-links{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:20px;}
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 20px;
+    border-bottom:1px solid var(--line);
+    background:var(--navy); color:#fff;
+  }
+  .drawer-head span{font-weight:700; font-size:15px;}
+  .drawer-close{
+    background:transparent; border:none; color:#fff;
+    font-size:22px; cursor:pointer; line-height:1;
+  }
+  .drawer nav{padding:8px 0;}
+  .drawer nav a{
+    display:block;
+    padding:14px 20px;
+    font-size:15px; font-weight:600;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+  }
+  .drawer nav a:hover{background:var(--cream); color:var(--navy);}
+  .drawer-footer{
+    margin-top:auto;
+    padding:18px 20px;
+    font-size:12.5px; color:var(--ink-soft);
+    border-top:1px solid var(--line);
+  }
 
-  footer{
-    text-align:center;
-    padding:40px 24px 60px;
-    color:var(--ink-soft);
-    font-size:14px;
+  /* ================= secondary content (reached only via drawer) ================= */
+  .secondary{background:var(--paper); border-top:1px solid var(--line);}
+  .secondary-inner{max-width:760px; margin:0 auto; padding:0 24px;}
+  .secondary section{padding:56px 0; border-top:1px solid var(--line);}
+  .secondary section:first-child{border-top:none;}
+  .secondary h2{
+    font-size:22px; font-weight:800; color:var(--navy);
+    margin:0 0 16px;
+    padding-right:14px;
+    border-right:4px solid var(--gold);
+    scroll-margin-top:80px;
   }
-  .badge{
-    display:inline-block;
+  .secondary p{margin:0 0 14px; color:var(--ink);}
+  .quote-line{
+    border-right:3px solid var(--gold);
     background:#FBF6E9;
-    color:#8A6A00;
-    border:1px solid #E9CE8A;
-    border-radius:999px;
-    padding:8px 20px;
-    font-weight:700;
-    font-size:14px;
-    margin-bottom:16px;
+    padding:14px 18px;
+    border-radius:6px;
+    color:#5A4A1F;
+    margin:16px 0;
   }
+  .goals{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px;}
+  .goal{background:var(--cream); border:1px solid var(--line); border-radius:8px; padding:18px 20px;}
+  .goal h3{margin:0 0 6px; font-size:16px; color:var(--navy);}
+  .goal p{margin:0; font-size:14.5px; color:var(--ink-soft);}
+  @media(max-width:600px){.goals{grid-template-columns:1fr;}}
+
+  .ledger{border-top:1px solid var(--line);}
+  .ledger-row{display:flex; align-items:baseline; gap:14px; padding:14px 4px; border-bottom:1px solid var(--line);}
+  .ledger-num{font-family:'Noto Naskh Arabic', serif; color:var(--gold); font-weight:700; font-size:14px; min-width:26px;}
+  .ledger-name{font-weight:700; flex:1; font-size:15px;}
+  .ledger-tag{font-size:12px; font-weight:700; color:var(--ink-soft); background:#EFEDE6; border-radius:999px; padding:3px 12px; white-space:nowrap;}
+
+  .steps{margin:8px 0 0; padding:0; list-style:none;}
+  .step{display:flex; gap:14px; margin-bottom:18px;}
+  .step-num{flex:0 0 auto; width:30px; height:30px; border-radius:50%; background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;}
+  .step-body h3{margin:0 0 4px; font-size:15.5px; color:var(--navy);}
+  .step-body p{margin:0; color:var(--ink-soft); font-size:14.5px;}
+
+  .contact-box{background:var(--navy); color:#fff; border-radius:10px; padding:28px; text-align:center;}
+  .contact-box h2{color:#fff; border-right-color:var(--gold);}
+  .contact-box p{color:#C9D6D9;}
+  .contact-links{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:16px;}
+  .btn{display:inline-block; padding:12px 24px; border-radius:6px; font-weight:700; font-size:15px; text-decoration:none;}
+  .btn-primary{background:var(--gold); color:var(--navy-dark);}
+  .btn-ghost{background:transparent; color:#fff; border:1px solid rgba(255,255,255,.5);}
+
+  footer{text-align:center; padding:30px 20px 50px; color:var(--ink-soft); font-size:13px;}
 
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
-    .btn{transition:none;}
+    .drawer, .overlay{transition:none;}
   }
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="hero-inner">
-    <span class="eyebrow">مشروع مرجعي تعاوني مفتوح</span>
-    <h1>منصة المحاسبة التطبيقية<br>للمعاملات المالية الإسلامية</h1>
-    <p class="hero-sub">مرجع عملي تراكمي يُبنى بالذكاء الجمعي، يجمع خبرات المحاسبين والفقهاء والباحثين في دليل واحد قابل للتطبيق داخل أي برنامج محاسبي.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#contribute">كيف أساهم؟</a>
-      <a class="btn btn-ghost" href="https://aghiadhamad99.blogspot.com/2026/07/blog-post.html" target="_blank" rel="noopener">اقرأ الدليل التأسيسي</a>
+<div class="topbar">
+  <div class="topbar-inner">
+    <button class="menu-btn" id="menuBtn" aria-label="فتح القائمة" aria-expanded="false" aria-controls="drawer">☰</button>
+    <div class="topbar-title">
+      منصة المحاسبة التطبيقية للمعاملات المالية الإسلامية
+      <small>مرجع تعاوني مفتوح — الإصدار التأسيسي</small>
     </div>
   </div>
-</header>
+</div>
+
+<div class="intro">
+  <span class="intro-badge">الإصدار التأسيسي — نرحب بالمساهمات العلمية</span>
+  <p>مرجع تطبيقي تعاوني مفتوح يبنيه المحاسبون والفقهاء والباحثون معاً بالذكاء الجمعي، ليربط الحكم الشرعي بالقيد المحاسبي مباشرة.</p>
+  <div class="intro-stat"><span id="statCount">0</span> موضوعاً منشوراً حتى الآن</div>
+</div>
 
 <main>
+  <div class="contrib-heading">
+    <h1>المساهمات المنشورة</h1>
+    <span class="contrib-count" id="contribCountLabel"></span>
+  </div>
 
-  <section id="why">
-    <h2>لماذا أُنشئ هذا المشروع؟</h2>
-    <p class="lead-text">كل محاسب يعمل بجد على فهم المعاملات المالية الإسلامية يصل، عاجلاً أو آجلاً، إلى نفس الحائط: معرفة متفرقة بين كتب الفقه ومعايير AAOIFI وخبرة كل ممارس الشخصية، بلا مرجع تطبيقي واحد يربط الحكم الشرعي بالقيد المحاسبي مباشرة.</p>
-    <div class="quote-line">هذا المشروع لا يهدف لاختراع علم جديد، ولا إصدار فتاوى، ولا استبدال المعايير الدولية أو البرامج المحاسبية — بل لجمع ما هو متفرق فعلاً، وتنظيمه في دليل واحد ينمو بمساهمات الجميع.</div>
-    <p>بدأت هذا العمل بدليل تأسيسي واحد. لو رأيت أن الفكرة تستحق أن تكبر بمساهمة أهل الاختصاص، فهذا المكان لذلك.</p>
-  </section>
-
-  <section id="vision">
-    <h2>رؤية المشروع</h2>
-    <p class="lead-text">بناء أول مرجع عالمي مفتوح يعتمد على الذكاء الجمعي لتحويل الخبرات المتفرقة في المحاسبة التطبيقية للمعاملات المالية الإسلامية إلى دليل عملي متكامل، يكون جسراً بين الفقه الإسلامي والممارسة المحاسبية والتطبيق داخل البرامج المحاسبية الحديثة — قابلاً للمراجعة والتطوير المستمر دون أن يكون أي إصدار منه نهائياً.</p>
-  </section>
-
-  <section id="goals">
-    <h2>الأهداف</h2>
-    <p class="section-lede">أربعة أهداف تحكم كل قرار في هذا المشروع.</p>
-    <div class="goals">
-      <div class="goal">
-        <h3>مرجع موحّد لا مبعثر</h3>
-        <p>تحويل الخبرات الفردية المتناثرة إلى دليل واحد منظّم، بدل أن يعيد كل محاسب اكتشاف نفس الحلول من الصفر.</p>
-      </div>
-      <div class="goal">
-        <h3>قابل للتطبيق فوراً</h3>
-        <p>كل معاملة تنتهي بقيد يومية فعلي ودليل حسابات مقترح، لا شرح نظري فقط.</p>
-      </div>
-      <div class="goal">
-        <h3>محايد تجاه البرامج</h3>
-        <p>يُبنى ليُستخدم داخل Odoo والأمين وERPNext وGoogle Sheets وغيرها، لا ليستبدل أياً منها.</p>
-      </div>
-      <div class="goal">
-        <h3>موثّق ومنسوب دائماً</h3>
-        <p>كل مساهمة تُحفظ باسم صاحبها في سجل دائم لا يُحذف، وكل حكم مربوط بدليله الشرعي.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="structure">
-    <h2>الهيكل المقترح للدليل</h2>
-    <p class="section-lede">هذا الترتيب هو مسار كل معاملة داخل الدليل — من العقد الشرعي حتى القوائم المالية. الأقسام التالية أبواب الإصدار التأسيسي؛ أغلبها لا يزال فارغاً بانتظار أول مساهمة.</p>
-    <div class="ledger">
-      <div class="ledger-row"><span class="ledger-num">٠١</span><span class="ledger-name">العقود والمعاملات المالية الإسلامية</span><span class="ledger-tag">قريباً</span></div>
-      <div class="ledger-row"><span class="ledger-num">٠٢</span><span class="ledger-name">دليل الحسابات</span><span class="ledger-tag">متوفر جزئياً</span></div>
-      <div class="ledger-row"><span class="ledger-num">٠٣</span><span class="ledger-name">الدورة المحاسبية</span><span class="ledger-tag">قريباً</span></div>
-      <div class="ledger-row"><span class="ledger-num">٠٤</span><span class="ledger-name">القيود المحاسبية</span><span class="ledger-tag">متوفر جزئياً</span></div>
-      <div class="ledger-row"><span class="ledger-num">٠٥</span><span class="ledger-name">السياسات المحاسبية</span><span class="ledger-tag">قريباً</span></div>
-      <div class="ledger-row"><span class="ledger-num">٠٦</span><span class="ledger-name">القوائم المالية</span><span class="ledger-tag">قريباً</span></div>
-      <div class="ledger-row"><span class="ledger-num">٠٧</span><span class="ledger-name">التقارير المالية</span><span class="ledger-tag">قريباً</span></div>
-      <div class="ledger-row"><span class="ledger-num">٠٨</span><span class="ledger-name">الزكاة</span><span class="ledger-tag">متوفر جزئياً</span></div>
-      <div class="ledger-row"><span class="ledger-num">٠٩</span><span class="ledger-name">الوقف</span><span class="ledger-tag">قريباً</span></div>
-      <div class="ledger-row"><span class="ledger-num">١٠</span><span class="ledger-name">التطبيقات العملية</span><span class="ledger-tag">قريباً</span></div>
-      <div class="ledger-row"><span class="ledger-num">١١</span><span class="ledger-name">تطبيقات داخل البرامج المحاسبية</span><span class="ledger-tag">قريباً</span></div>
-      <div class="ledger-row"><span class="ledger-num">١٢</span><span class="ledger-name">نماذج Excel وGoogle Sheets</span><span class="ledger-tag">قريباً</span></div>
-      <div class="ledger-row"><span class="ledger-num">١٣</span><span class="ledger-name">الدراسات والأبحاث والمراجع العلمية</span><span class="ledger-tag">قريباً</span></div>
-    </div>
-  </section>
-
-  <section id="contributions">
-    <h2>أحدث المساهمات المنشورة</h2>
-    <p class="section-lede">تُضاف هذه القائمة تلقائياً من ملف <code>apps-config.js</code> — لا حاجة لتعديل هذه الصفحة عند نشر أي مساهمة جديدة.</p>
-    <div id="contrib-grid" class="contrib-grid"></div>
-    <div id="contrib-empty" class="contrib-empty" style="display:none;">
-      لا توجد مساهمات منشورة بعد — كن أول المساهمين عبر
-      <a href="https://forms.gle/cdugXLeyf9dzCsGR7" target="_blank" rel="noopener">نموذج المساهمة</a>.
-    </div>
-  </section>
-
-  <section id="contribute">
-    <h2>كيف يمكن المساهمة؟</h2>
-    <ol class="steps">
-      <li class="step">
-        <span class="step-num">١</span>
-        <div class="step-body">
-          <h3>اقرأ الدليل التأسيسي أولاً</h3>
-          <p>يشرح المنهجية التي يتبعها المشروع: من القاعدة الفقهية إلى المعالجة المحاسبية.</p>
-        </div>
-      </li>
-      <li class="step">
-        <span class="step-num">٢</span>
-        <div class="step-body">
-          <h3>اختر باباً تتقنه</h3>
-          <p>عقداً بعينه، أو دليل حسابات معاملة، أو نموذج تطبيقي داخل برنامج تستخدمه.</p>
-        </div>
-      </li>
-      <li class="step">
-        <span class="step-num">٣</span>
-        <div class="step-body">
-          <h3>أرسل مساهمتك</h3>
-          <p>عبر البريد الإلكتروني أو نموذج المساهمة أدناه — نص، ملف، أو حتى ملاحظة على معالجة موجودة.</p>
-        </div>
-      </li>
-      <li class="step">
-        <span class="step-num">٤</span>
-        <div class="step-body">
-          <h3>تُنسب إليك وتُنشر</h3>
-          <p>بعد مراجعة علمية، تُضاف مساهمتك للدليل باسمك، وتبقى في سجل التعديلات دائماً.</p>
-        </div>
-      </li>
-    </ol>
-
-    <div class="contact-box">
-      <h2>راسلنا</h2>
-      <p class="section-lede">للمساهمة العلمية، أو الملاحظات، أو الانضمام كمراجع.</p>
-      <div class="contact-links">
-        <!-- ضع بريدك الإلكتروني الفعلي هنا -->
-        <a class="btn btn-primary" href="mailto:a.finance99u@gmail.com">راسلنا عبر البريد الإلكتروني</a>
-        <!-- استبدل هذا الرابط برابط نموذج Google Form الخاص بك -->
-        <a class="btn btn-ghost" href="https://forms.gle/cdugXLeyf9dzCsGR7" target="_blank" rel="noopener">نموذج المساهمة</a>
-      </div>
-    </div>
-  </section>
-
+  <div id="contrib-grid" class="contrib-grid"></div>
+  <div id="contrib-empty" class="contrib-empty" style="display:none;">
+    لا توجد مساهمات منشورة بعد — كن أول المساهمين عبر
+    <a href="https://forms.gle/cdugXLeyf9dzCsGR7" target="_blank" rel="noopener">نموذج المساهمة</a>.
+  </div>
 </main>
 
-<footer>
-  <span class="badge">الإصدار التأسيسي — نرحب بالمساهمات العلمية</span>
-  <p>منصة المحاسبة التطبيقية للمعاملات المالية الإسلامية — مشروع مفتوح للذكاء الجمعي</p>
-</footer>
+<!-- ================= off-canvas drawer: كل شيء آخر هنا فقط ================= -->
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <span>القائمة</span>
+    <button class="drawer-close" id="drawerClose" aria-label="إغلاق القائمة">×</button>
+  </div>
+  <nav>
+    <a href="#why" class="drawer-link">لماذا أُنشئ المشروع؟</a>
+    <a href="#vision" class="drawer-link">رؤية المشروع</a>
+    <a href="#goals" class="drawer-link">الأهداف</a>
+    <a href="#structure" class="drawer-link">الهيكل المقترح للدليل</a>
+    <a href="#contribute" class="drawer-link">كيف يمكن المساهمة؟</a>
+    <a href="#contact" class="drawer-link">راسلنا</a>
+    <a href="https://aghiadhamad99.blogspot.com/2026/07/blog-post.html" target="_blank" rel="noopener" class="drawer-link">الدليل التأسيسي (المقال الكامل)</a>
+  </nav>
+  <div class="drawer-footer">منصة المحاسبة التطبيقية للمعاملات المالية الإسلامية — مشروع مفتوح للذكاء الجمعي</div>
+</aside>
+
+<!-- ================= المحتوى الثانوي: لا يظهر إلا عبر روابط القائمة ================= -->
+<div class="secondary">
+  <div class="secondary-inner">
+
+    <section id="why">
+      <h2>لماذا أُنشئ هذا المشروع؟</h2>
+      <p>كل محاسب يعمل بجد على فهم المعاملات المالية الإسلامية يصل، عاجلاً أو آجلاً، إلى نفس الحائط: معرفة متفرقة بين كتب الفقه ومعايير AAOIFI وخبرة كل ممارس الشخصية، بلا مرجع تطبيقي واحد يربط الحكم الشرعي بالقيد المحاسبي مباشرة.</p>
+      <div class="quote-line">هذا المشروع لا يهدف لاختراع علم جديد، ولا إصدار فتاوى، ولا استبدال المعايير الدولية أو البرامج المحاسبية — بل لجمع ما هو متفرق فعلاً، وتنظيمه في دليل واحد ينمو بمساهمات الجميع.</div>
+      <p>بدأت هذا العمل بدليل تأسيسي واحد. لو رأيت أن الفكرة تستحق أن تكبر بمساهمة أهل الاختصاص، فهذا المكان لذلك.</p>
+    </section>
+
+    <section id="vision">
+      <h2>رؤية المشروع</h2>
+      <p>بناء أول مرجع عالمي مفتوح يعتمد على الذكاء الجمعي لتحويل الخبرات المتفرقة في المحاسبة التطبيقية للمعاملات المالية الإسلامية إلى دليل عملي متكامل، يكون جسراً بين الفقه الإسلامي والممارسة المحاسبية والتطبيق داخل البرامج المحاسبية الحديثة — قابلاً للمراجعة والتطوير المستمر دون أن يكون أي إصدار منه نهائياً.</p>
+    </section>
+
+    <section id="goals">
+      <h2>الأهداف</h2>
+      <div class="goals">
+        <div class="goal"><h3>مرجع موحّد لا مبعثر</h3><p>تحويل الخبرات الفردية المتناثرة إلى دليل واحد منظّم.</p></div>
+        <div class="goal"><h3>قابل للتطبيق فوراً</h3><p>كل معاملة تنتهي بقيد يومية فعلي ودليل حسابات مقترح.</p></div>
+        <div class="goal"><h3>محايد تجاه البرامج</h3><p>يُستخدم داخل Odoo والأمين وERPNext وGoogle Sheets وغيرها.</p></div>
+        <div class="goal"><h3>موثّق ومنسوب دائماً</h3><p>كل مساهمة تُحفظ باسم صاحبها في سجل دائم لا يُحذف.</p></div>
+      </div>
+    </section>
+
+    <section id="structure">
+      <h2>الهيكل المقترح للدليل</h2>
+      <p>هذا الترتيب هو مسار كل معاملة داخل الدليل — من العقد الشرعي حتى القوائم المالية.</p>
+      <div class="ledger">
+        <div class="ledger-row"><span class="ledger-num">٠١</span><span class="ledger-name">العقود والمعاملات المالية الإسلامية</span><span class="ledger-tag">قريباً</span></div>
+        <div class="ledger-row"><span class="ledger-num">٠٢</span><span class="ledger-name">دليل الحسابات</span><span class="ledger-tag">متوفر جزئياً</span></div>
+        <div class="ledger-row"><span class="ledger-num">٠٣</span><span class="ledger-name">الدورة المحاسبية</span><span class="ledger-tag">قريباً</span></div>
+        <div class="ledger-row"><span class="ledger-num">٠٤</span><span class="ledger-name">القيود المحاسبية</span><span class="ledger-tag">متوفر جزئياً</span></div>
+        <div class="ledger-row"><span class="ledger-num">٠٥</span><span class="ledger-name">السياسات المحاسبية</span><span class="ledger-tag">قريباً</span></div>
+        <div class="ledger-row"><span class="ledger-num">٠٦</span><span class="ledger-name">القوائم المالية</span><span class="ledger-tag">قريباً</span></div>
+        <div class="ledger-row"><span class="ledger-num">٠٧</span><span class="ledger-name">التقارير المالية</span><span class="ledger-tag">قريباً</span></div>
+        <div class="ledger-row"><span class="ledger-num">٠٨</span><span class="ledger-name">الزكاة</span><span class="ledger-tag">متوفر جزئياً</span></div>
+        <div class="ledger-row"><span class="ledger-num">٠٩</span><span class="ledger-name">الوقف</span><span class="ledger-tag">قريباً</span></div>
+        <div class="ledger-row"><span class="ledger-num">١٠</span><span class="ledger-name">التطبيقات العملية</span><span class="ledger-tag">قريباً</span></div>
+        <div class="ledger-row"><span class="ledger-num">١١</span><span class="ledger-name">تطبيقات داخل البرامج المحاسبية</span><span class="ledger-tag">قريباً</span></div>
+        <div class="ledger-row"><span class="ledger-num">١٢</span><span class="ledger-name">نماذج Excel وGoogle Sheets</span><span class="ledger-tag">قريباً</span></div>
+        <div class="ledger-row"><span class="ledger-num">١٣</span><span class="ledger-name">الدراسات والأبحاث والمراجع العلمية</span><span class="ledger-tag">قريباً</span></div>
+      </div>
+    </section>
+
+    <section id="contribute">
+      <h2>كيف يمكن المساهمة؟</h2>
+      <ol class="steps">
+        <li class="step"><span class="step-num">١</span><div class="step-body"><h3>اقرأ الدليل التأسيسي أولاً</h3><p>يشرح المنهجية: من القاعدة الفقهية إلى المعالجة المحاسبية.</p></div></li>
+        <li class="step"><span class="step-num">٢</span><div class="step-body"><h3>اختر باباً تتقنه</h3><p>عقداً بعينه، أو دليل حسابات معاملة، أو نموذج تطبيقي.</p></div></li>
+        <li class="step"><span class="step-num">٣</span><div class="step-body"><h3>أرسل مساهمتك</h3><p>عبر نموذج المساهمة أدناه — نص أو ملف.</p></div></li>
+        <li class="step"><span class="step-num">٤</span><div class="step-body"><h3>تُنسب إليك وتُنشر</h3><p>بعد مراجعة علمية، تُضاف مساهمتك للدليل باسمك.</p></div></li>
+      </ol>
+    </section>
+
+    <section id="contact">
+      <div class="contact-box">
+        <h2>راسلنا</h2>
+        <p>للمساهمة العلمية، أو الملاحظات، أو الانضمام كمراجع.</p>
+        <div class="contact-links">
+          <a class="btn btn-primary" href="mailto:a.finance99u@gmail.com">راسلنا عبر البريد الإلكتروني</a>
+          <a class="btn btn-ghost" href="https://forms.gle/cdugXLeyf9dzCsGR7" target="_blank" rel="noopener">نموذج المساهمة</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer>منصة المحاسبة التطبيقية للمعاملات المالية الإسلامية — مشروع مفتوح للذكاء الجمعي</footer>
 
 <script src="apps-config.js"></script>
 <script>
 (function(){
+  // ---------- render contributions ----------
   var list = (window.AHA_CONTRIBUTIONS || []).slice();
   var grid = document.getElementById('contrib-grid');
   var empty = document.getElementById('contrib-empty');
+  var statCount = document.getElementById('statCount');
+  var countLabel = document.getElementById('contribCountLabel');
+
+  statCount.textContent = list.length;
+  countLabel.textContent = list.length ? (list.length + ' موضوعاً') : '';
 
   if (!list.length) {
     empty.style.display = 'block';
-    return;
+  } else {
+    list.sort(function(a, b){ return (b.date || '').localeCompare(a.date || ''); });
+    list.forEach(function(item){
+      var card = document.createElement('div');
+      card.className = 'contrib-card';
+
+      var tag = document.createElement('span');
+      tag.className = 'contrib-tag';
+      tag.textContent = item.section || 'عام';
+      card.appendChild(tag);
+
+      var h3 = document.createElement('h3');
+      h3.textContent = item.title || '';
+      card.appendChild(h3);
+
+      var meta = document.createElement('p');
+      meta.className = 'contrib-meta';
+      meta.textContent = 'أعدّه: ' + (item.author || 'مجهول') + (item.date ? ' — ' + item.date : '');
+      card.appendChild(meta);
+
+      if (item.summary) {
+        var summary = document.createElement('p');
+        summary.className = 'contrib-summary';
+        summary.textContent = item.summary;
+        card.appendChild(summary);
+      }
+
+      if (item.fileUrl) {
+        var link = document.createElement('a');
+        link.className = 'contrib-link';
+        link.href = item.fileUrl;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = 'فتح الموضوع ←';
+        card.appendChild(link);
+      }
+
+      grid.appendChild(card);
+    });
   }
 
-  // الأحدث أولاً
-  list.sort(function(a, b){ return (b.date || '').localeCompare(a.date || ''); });
+  // ---------- drawer open/close ----------
+  var menuBtn = document.getElementById('menuBtn');
+  var drawer = document.getElementById('drawer');
+  var overlay = document.getElementById('overlay');
+  var closeBtn = document.getElementById('drawerClose');
 
-  list.forEach(function(item){
-    var card = document.createElement('div');
-    card.className = 'contrib-card';
-
-    var tag = document.createElement('span');
-    tag.className = 'contrib-tag';
-    tag.textContent = item.section || 'عام';
-    card.appendChild(tag);
-
-    var h3 = document.createElement('h3');
-    h3.textContent = item.title || '';
-    card.appendChild(h3);
-
-    var meta = document.createElement('p');
-    meta.className = 'contrib-meta';
-    meta.textContent = 'أعدّه: ' + (item.author || 'مجهول') + (item.date ? ' — ' + item.date : '');
-    card.appendChild(meta);
-
-    if (item.summary) {
-      var summary = document.createElement('p');
-      summary.className = 'contrib-summary';
-      summary.textContent = item.summary;
-      card.appendChild(summary);
-    }
-
-    if (item.fileUrl) {
-      var link = document.createElement('a');
-      link.className = 'contrib-link';
-      link.href = item.fileUrl;
-      link.target = '_blank';
-      link.rel = 'noopener';
-      link.textContent = 'فتح الموضوع ←';
-      card.appendChild(link);
-    }
-
-    grid.appendChild(card);
+  function openDrawer(){
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    menuBtn.setAttribute('aria-expanded', 'true');
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+  menuBtn.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+  document.querySelectorAll('.drawer-link').forEach(function(a){
+    a.addEventListener('click', function(){ closeDrawer(); });
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeDrawer();
   });
 })();
 </script>
