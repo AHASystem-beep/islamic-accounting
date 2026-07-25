@@ -150,6 +150,44 @@
     white-space:nowrap;
   }
 
+  /* ---------- published contributions (dynamic, from apps-config.js) ---------- */
+  .contrib-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:16px;
+    margin-top:8px;
+  }
+  .contrib-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:20px 22px;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .contrib-tag{
+    align-self:flex-start;
+    font-size:12px; font-weight:700;
+    color:var(--navy);
+    background:#EAF1F3;
+    border-radius:999px;
+    padding:3px 12px;
+  }
+  .contrib-card h3{margin:0; font-size:17px; color:var(--navy); font-weight:700;}
+  .contrib-meta{font-size:13.5px; color:var(--ink-soft); margin:0;}
+  .contrib-summary{font-size:14.5px; color:var(--ink); margin:0;}
+  .contrib-link{
+    margin-top:auto; font-size:14.5px; font-weight:700;
+    color:var(--gold); text-decoration:none;
+  }
+  .contrib-link:hover{text-decoration:underline;}
+  .contrib-empty{
+    border:1px dashed var(--line);
+    border-radius:8px;
+    padding:32px 24px;
+    text-align:center;
+    color:var(--ink-soft);
+  }
+  .contrib-empty a{color:var(--navy); font-weight:700; text-decoration:underline;}
+  @media(max-width:620px){.contrib-grid{grid-template-columns:1fr;}}
+
   /* ---------- contribute steps ---------- */
   .steps{margin-top:8px; padding-right:0; list-style:none;}
   .step{
@@ -273,6 +311,16 @@
     </div>
   </section>
 
+  <section id="contributions">
+    <h2>أحدث المساهمات المنشورة</h2>
+    <p class="section-lede">تُضاف هذه القائمة تلقائياً من ملف <code>apps-config.js</code> — لا حاجة لتعديل هذه الصفحة عند نشر أي مساهمة جديدة.</p>
+    <div id="contrib-grid" class="contrib-grid"></div>
+    <div id="contrib-empty" class="contrib-empty" style="display:none;">
+      لا توجد مساهمات منشورة بعد — كن أول المساهمين عبر
+      <a href="https://forms.gle/cdugXLeyf9dzCsGR7" target="_blank" rel="noopener">نموذج المساهمة</a>.
+    </div>
+  </section>
+
   <section id="contribute">
     <h2>كيف يمكن المساهمة؟</h2>
     <ol class="steps">
@@ -311,9 +359,9 @@
       <p class="section-lede">للمساهمة العلمية، أو الملاحظات، أو الانضمام كمراجع.</p>
       <div class="contact-links">
         <!-- ضع بريدك الإلكتروني الفعلي هنا -->
-        <a class="btn btn-primary" href="mailto:a.finance99u@gmail.com">راسلنا عبر البريد الإلكتروني</a>
+        <a class="btn btn-primary" href="mailto:your-email@example.com">راسلنا عبر البريد الإلكتروني</a>
         <!-- استبدل هذا الرابط برابط نموذج Google Form الخاص بك -->
-        <a class="btn btn-ghost" href="https://forms.gle/cdugXLeyf9dzCsGR7" target="_blank" rel="noopener">نموذج المساهمة</a>
+        <a class="btn btn-ghost" href="https://forms.gle/your-form-id" target="_blank" rel="noopener">نموذج المساهمة</a>
       </div>
     </div>
   </section>
@@ -325,5 +373,59 @@
   <p>منصة المحاسبة التطبيقية للمعاملات المالية الإسلامية — مشروع مفتوح للذكاء الجمعي</p>
 </footer>
 
+<script src="apps-config.js"></script>
+<script>
+(function(){
+  var list = (window.AHA_CONTRIBUTIONS || []).slice();
+  var grid = document.getElementById('contrib-grid');
+  var empty = document.getElementById('contrib-empty');
+
+  if (!list.length) {
+    empty.style.display = 'block';
+    return;
+  }
+
+  // الأحدث أولاً
+  list.sort(function(a, b){ return (b.date || '').localeCompare(a.date || ''); });
+
+  list.forEach(function(item){
+    var card = document.createElement('div');
+    card.className = 'contrib-card';
+
+    var tag = document.createElement('span');
+    tag.className = 'contrib-tag';
+    tag.textContent = item.section || 'عام';
+    card.appendChild(tag);
+
+    var h3 = document.createElement('h3');
+    h3.textContent = item.title || '';
+    card.appendChild(h3);
+
+    var meta = document.createElement('p');
+    meta.className = 'contrib-meta';
+    meta.textContent = 'أعدّه: ' + (item.author || 'مجهول') + (item.date ? ' — ' + item.date : '');
+    card.appendChild(meta);
+
+    if (item.summary) {
+      var summary = document.createElement('p');
+      summary.className = 'contrib-summary';
+      summary.textContent = item.summary;
+      card.appendChild(summary);
+    }
+
+    if (item.fileUrl) {
+      var link = document.createElement('a');
+      link.className = 'contrib-link';
+      link.href = item.fileUrl;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.textContent = 'فتح الموضوع ←';
+      card.appendChild(link);
+    }
+
+    grid.appendChild(card);
+  });
+})();
+</script>
 </body>
 </html>
